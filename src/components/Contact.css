@@ -1,0 +1,53 @@
+.contact {
+  padding:
+    clamp(4.5rem, 10vw, 8.5rem)
+    var(--container-pad)
+    clamp(4.5rem, 10vw, 8.5rem);
+  border-top: 1px solid var(--border);
+}
+
+.contact__inner {
+  max-width: 40rem;
+}
+
+.contact__eyebrow {
+  margin-bottom: 0.9rem;
+  color: var(--accent);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.contact__title {
+  color: var(--text);
+  font-size: clamp(2rem, 2.2vw + 1.1rem, 3.15rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+}
+
+.contact__lead {
+  margin-top: 1.25rem;
+  max-width: 32rem;
+  color: var(--text-muted);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+.contact__cta {
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+  min-width: 12.5rem;
+}
+
+@media (max-width: 640px) {
+  .contact__inner {
+    max-width: none;
+  }
+
+  .contact__cta {
+    width: 100%;
+  }
+}
