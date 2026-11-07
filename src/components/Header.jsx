@@ -1,4 +1,5 @@
-import { hasMaxLink, MAX_URL, PHONE } from "../data/contacts.js";
+import { useEffect, useId, useRef, useState } from "react";
+import { hasMaxLink, MAX_URL, PHONES } from "../data/contacts.js";
 import { asset, homePath } from "../utils/asset.js";
 import "./Header.css";
 
@@ -10,6 +11,33 @@ const NAV_ITEMS = [
 ];
 
 function Header() {
+  const [callOpen, setCallOpen] = useState(false);
+  const callRef = useRef(null);
+  const menuId = useId();
+
+  useEffect(() => {
+    if (!callOpen) return undefined;
+
+    const onPointerDown = (event) => {
+      if (!callRef.current?.contains(event.target)) {
+        setCallOpen(false);
+      }
+    };
+
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setCallOpen(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", onPointerDown);
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [callOpen]);
+
   return (
     <header className="site-header">
       <div className="site-header__inner">
@@ -55,9 +83,41 @@ function Header() {
               Написать в MAX
             </a>
           ) : null}
-          <a className="btn btn--ghost site-header__call" href={PHONE.href}>
-            Позвонить <span aria-hidden="true">↗</span>
-          </a>
+
+          <div className="site-header__call-wrap" ref={callRef}>
+            <button
+              type="button"
+              className="btn btn--ghost site-header__call"
+              aria-expanded={callOpen}
+              aria-controls={menuId}
+              aria-haspopup="menu"
+              onClick={() => setCallOpen((value) => !value)}
+            >
+              Позвонить <span aria-hidden="true">↗</span>
+            </button>
+
+            {callOpen ? (
+              <div
+                id={menuId}
+                className="site-header__call-menu"
+                role="menu"
+                aria-label="Выберите, кому позвонить"
+              >
+                {PHONES.map((person) => (
+                  <a
+                    key={person.id}
+                    className="site-header__call-option"
+                    href={person.href}
+                    role="menuitem"
+                    onClick={() => setCallOpen(false)}
+                  >
+                    <span className="site-header__call-name">{person.name}</span>
+                    <span className="site-header__call-number">{person.label}</span>
+                  </a>
+                ))}
+              </div>
+            ) : null}
+          </div>
         </div>
       </div>
     </header>

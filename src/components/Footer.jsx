@@ -1,4 +1,4 @@
-import { hasMaxLink, MAX_URL, PHONE } from "../data/contacts.js";
+import { hasMaxLink, MAX_URL, PHONES } from "../data/contacts.js";
 import { asset, homePath } from "../utils/asset.js";
 import "./Footer.css";
 
@@ -45,9 +45,16 @@ function Footer() {
 
         <div className="site-footer__contacts">
           <p className="site-footer__contacts-title">Связаться с нами</p>
-          <a className="site-footer__phone" href={PHONE.href}>
-            {PHONE.label}
-          </a>
+          <ul className="site-footer__phones">
+            {PHONES.map((person) => (
+              <li key={person.id} className="site-footer__phone-item">
+                <span className="site-footer__phone-name">{person.name}</span>
+                <a className="site-footer__phone" href={person.href}>
+                  {person.label}
+                </a>
+              </li>
+            ))}
+          </ul>
           {hasMaxLink ? (
             <a
               className="site-footer__max"

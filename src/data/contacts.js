@@ -1,9 +1,21 @@
 /** Shared contact details for AeroLux. */
 
-export const PHONE = {
-  href: "tel:+79772560473",
-  label: "+7 977 256-04-73",
-};
+export const PHONES = [
+  {
+    id: "artem",
+    name: "Артём",
+    href: "tel:+79772560473",
+    label: "+7 977 256-04-73",
+  },
+  {
+    id: "andrey",
+    name: "Андрей",
+    href: "tel:+79999246042",
+    label: "+7 999 924-60-42",
+  },
+];
+
+export const PHONE = PHONES[0];
 
 /**
  * Personal MAX profile link (Artyom).
