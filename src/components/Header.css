@@ -59,8 +59,17 @@
   color: var(--text);
 }
 
-.site-header__call {
+.site-header__actions {
   justify-self: end;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.55rem;
+}
+
+.site-header__call,
+.site-header__max {
   min-height: 2.5rem;
   padding: 0.55rem 1.1rem;
   font-size: 0.875rem;
@@ -82,7 +91,13 @@
     height: 3.05rem;
   }
 
-  .site-header__call {
-    padding-inline: 0.9rem;
+  .site-header__actions {
+    max-width: 12.5rem;
+  }
+
+  .site-header__call,
+  .site-header__max {
+    padding-inline: 0.85rem;
+    font-size: 0.8125rem;
   }
 }

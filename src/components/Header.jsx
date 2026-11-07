@@ -1,3 +1,4 @@
+import { hasMaxLink, MAX_URL, PHONE } from "../data/contacts.js";
 import { asset, homePath } from "../utils/asset.js";
 import "./Header.css";
 
@@ -43,9 +44,21 @@ function Header() {
           </ul>
         </nav>
 
-        <a className="btn btn--ghost site-header__call" href="tel:+79772560473">
-          Позвонить <span aria-hidden="true">↗</span>
-        </a>
+        <div className="site-header__actions">
+          {hasMaxLink ? (
+            <a
+              className="btn btn--ghost site-header__max"
+              href={MAX_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Написать в MAX
+            </a>
+          ) : null}
+          <a className="btn btn--ghost site-header__call" href={PHONE.href}>
+            Позвонить <span aria-hidden="true">↗</span>
+          </a>
+        </div>
       </div>
     </header>
   );

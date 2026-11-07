@@ -1,3 +1,4 @@
+import { hasMaxLink, MAX_URL, PHONE } from "../data/contacts.js";
 import { asset, homePath } from "../utils/asset.js";
 import "./Footer.css";
 
@@ -7,11 +8,6 @@ const NAV_ITEMS = [
   { id: "team", label: "О команде" },
   { id: "contacts", label: "Контакты" },
 ];
-
-const PHONE = {
-  href: "tel:+79772560473",
-  label: "+7 977 256-04-73",
-};
 
 function Footer() {
   return (
@@ -52,6 +48,16 @@ function Footer() {
           <a className="site-footer__phone" href={PHONE.href}>
             {PHONE.label}
           </a>
+          {hasMaxLink ? (
+            <a
+              className="site-footer__max"
+              href={MAX_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Написать в MAX
+            </a>
+          ) : null}
         </div>
       </div>
 
