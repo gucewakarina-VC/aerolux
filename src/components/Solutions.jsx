@@ -30,7 +30,7 @@ const ROWS = [
       height: 896,
     },
     {
-      title: "Скрытые карнизы",
+      title: "Скрытая ниша для штор",
       image: asset("/images/hidden-cornice.png"),
       position: "48% 55%",
     },
