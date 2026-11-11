@@ -1,3 +1,5 @@
+import { hasTelegramBlog, PHONE, TELEGRAM_BLOG_URL } from "../data/contacts.js";
+import TelegramIcon from "./TelegramIcon.jsx";
 import "./Contact.css";
 
 function Contact() {
@@ -12,9 +14,20 @@ function Contact() {
           Расскажите о вашем помещении и пожеланиях. Поможем подобрать решение
           для потолка и освещения.
         </p>
-        <a className="btn btn--primary contact__cta" href="tel:+79772560473">
+        <a className="btn btn--primary contact__cta" href={PHONE.href}>
           Обсудить проект
         </a>
+        {hasTelegramBlog ? (
+          <a
+            className="contact__telegram"
+            href={TELEGRAM_BLOG_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <TelegramIcon className="contact__telegram-icon" />
+            <span>Наш блог в Telegram</span>
+          </a>
+        ) : null}
       </div>
     </section>
   );

@@ -1,5 +1,12 @@
-import { hasMaxLink, MAX_URL, PHONES } from "../data/contacts.js";
+import {
+  hasMaxLink,
+  hasTelegramBlog,
+  MAX_URL,
+  PHONES,
+  TELEGRAM_BLOG_URL,
+} from "../data/contacts.js";
 import { asset, homePath } from "../utils/asset.js";
+import TelegramIcon from "./TelegramIcon.jsx";
 import "./Footer.css";
 
 const NAV_ITEMS = [
@@ -63,6 +70,17 @@ function Footer() {
               rel="noopener noreferrer"
             >
               Написать в MAX
+            </a>
+          ) : null}
+          {hasTelegramBlog ? (
+            <a
+              className="site-footer__telegram"
+              href={TELEGRAM_BLOG_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <TelegramIcon className="site-footer__telegram-icon" />
+              <span>Наш блог в Telegram</span>
             </a>
           ) : null}
         </div>

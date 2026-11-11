@@ -26,3 +26,9 @@ export const MAX_URL =
   "https://max.ru/u/f9LHodD0cOJ5R1GlgMoSqicyRtDGPufRjrxaTfPCZG8K6G6ZgzFnKu-2AhU";
 
 export const hasMaxLink = Boolean(MAX_URL?.trim());
+
+/** Public AeroLux Telegram blog. */
+export const TELEGRAM_BLOG_URL = "https://t.me/PotolkiAeroLux";
+
+export const hasTelegramBlog = Boolean(TELEGRAM_BLOG_URL?.trim());
+

@@ -132,8 +132,31 @@
   color: var(--accent);
 }
 
+.site-footer__telegram {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.95rem;
+  min-height: 2.5rem;
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.35;
+  transition: color var(--transition);
+}
+
+.site-footer__telegram:hover {
+  color: var(--accent);
+}
+
+.site-footer__telegram-icon {
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
 @media (max-width: 640px) {
-  .site-footer__max {
+  .site-footer__max,
+  .site-footer__telegram {
     width: 100%;
   }
 }
