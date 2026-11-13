@@ -52,14 +52,18 @@ const SERVICES = [
   {
     id: "walls",
     title: "Натяжные стены",
-    description:
-      "Декоративное оформление стен с помощью натяжного полотна. Подбираем фактуру и оформление под интерьер.",
+    image: asset("/images/stretch-walls.png"),
+    position: "center 58%",
+    width: 1280,
+    height: 920,
   },
   {
     id: "fabric",
     title: "Тканевые потолки",
-    description:
-      "Матовая поверхность с деликатной текстильной фактурой для спокойных, лаконичных интерьеров.",
+    image: asset("/images/fabric-ceiling.png"),
+    position: "center 32%",
+    width: 1280,
+    height: 860,
   },
 ];
 
