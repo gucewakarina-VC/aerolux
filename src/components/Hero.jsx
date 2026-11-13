@@ -9,8 +9,8 @@ function Hero() {
           className="hero__photo"
           src={asset("/images/hero-living-room-dark.png")}
           alt="Гостиная и кухня с натяжным потолком и трековым освещением"
-          width="1024"
-          height="439"
+          width="1915"
+          height="821"
           decoding="async"
           fetchPriority="high"
           loading="eager"
