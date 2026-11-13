@@ -7,10 +7,10 @@ function Hero() {
       <div className="hero__media">
         <img
           className="hero__photo"
-          src={asset("/images/aerolux-hero.png")}
-          alt="Интерьер с натяжным потолком, световыми линиями и трековым освещением"
-          width="1875"
-          height="839"
+          src={asset("/images/hero-living-room-dark.png")}
+          alt="Гостиная и кухня с натяжным потолком и трековым освещением"
+          width="1024"
+          height="439"
           decoding="async"
           fetchPriority="high"
           loading="eager"

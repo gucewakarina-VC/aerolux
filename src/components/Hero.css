@@ -3,7 +3,7 @@
   isolation: isolate;
   display: flex;
   align-items: center;
-  aspect-ratio: 1024 / 458;
+  aspect-ratio: 1024 / 439;
   overflow: hidden;
   border-radius: 0 0 var(--radius-media) var(--radius-media);
 }
@@ -62,21 +62,27 @@
   min-width: 11.5rem;
 }
 
+@media (max-width: 900px) {
+  .hero__photo {
+    object-position: 28% center;
+  }
+}
+
 @media (max-width: 768px) {
   .hero {
     aspect-ratio: auto;
     min-height: 32rem;
     max-height: none;
-    align-items: flex-end;
+    align-items: center;
   }
 
   .hero__photo {
-    object-position: 32% 18%;
+    object-position: 18% 42%;
   }
 
   .hero__content {
     width: min(100%, 24rem);
-    padding-bottom: 2rem;
+    padding-bottom: 2.25rem;
   }
 
   .hero__title {
@@ -90,7 +96,7 @@
   }
 
   .hero__photo {
-    object-position: 22% 12%;
+    object-position: 12% 40%;
   }
 
   .hero__eyebrow {
