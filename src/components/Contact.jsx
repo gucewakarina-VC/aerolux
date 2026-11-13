@@ -55,10 +55,10 @@ function Contact() {
         <div className="contact__media">
           <img
             className="contact__photo"
-            src={asset("/images/project-kitchen.png")}
-            alt="Интерьер с натяжным потолком и тёплым освещением"
-            width={1448}
-            height={1086}
+            src={asset("/images/contact-ceiling.png")}
+            alt="Натяжной потолок AeroLux со светильниками"
+            width={1024}
+            height={768}
             decoding="async"
           />
         </div>
