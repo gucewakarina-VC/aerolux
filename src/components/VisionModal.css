@@ -4,7 +4,7 @@
   z-index: 50;
   display: grid;
   place-items: center;
-  padding: 1rem;
+  padding: 0.75rem;
   background-color: rgba(20, 19, 16, 0.88);
 }
 
@@ -12,8 +12,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  width: min(100%, 42rem);
-  max-height: min(92vh, 52rem);
+  width: min(100%, 40rem);
+  max-height: min(94vh, 54rem);
   overflow: hidden;
   border: 1px solid var(--border);
   border-radius: var(--radius-media);
@@ -23,8 +23,8 @@
 
 .vision-modal__close {
   position: absolute;
-  top: 0.85rem;
-  right: 0.85rem;
+  top: 0.7rem;
+  right: 0.7rem;
   z-index: 2;
   min-height: 2.5rem;
   padding: 0.45rem 0.9rem;
@@ -45,14 +45,18 @@
 }
 
 .vision-modal__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
   overflow: auto;
-  padding: clamp(1.5rem, 4vw, 2.25rem);
-  padding-right: clamp(4.5rem, 10vw, 6rem);
+  padding: 1.15rem 1.25rem 1.2rem;
+  padding-right: 5.25rem;
   -webkit-overflow-scrolling: touch;
 }
 
 .vision-modal__eyebrow {
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.55rem;
   color: var(--accent);
   font-size: 0.6875rem;
   font-weight: 500;
@@ -64,7 +68,7 @@
 .vision-modal__title {
   max-width: 22rem;
   color: var(--text);
-  font-size: clamp(1.45rem, 1.2vw + 1rem, 2rem);
+  font-size: clamp(1.35rem, 1.1vw + 0.95rem, 1.85rem);
   font-weight: 500;
   letter-spacing: -0.015em;
   line-height: 1.15;
@@ -74,15 +78,15 @@
   display: inline-grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   width: min(100%, 22rem);
-  margin-top: 1.35rem;
+  margin-top: 1rem;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   overflow: hidden;
 }
 
 .vision-modal__tab {
-  min-height: 2.6rem;
-  padding: 0.55rem 0.9rem;
+  min-height: 2.5rem;
+  padding: 0.5rem 0.85rem;
   border: 0;
   border-right: 1px solid var(--border);
   background: transparent;
@@ -109,13 +113,17 @@
 }
 
 .vision-modal__panel {
-  margin-top: 1.35rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  margin-top: 1rem;
 }
 
 .vision-modal__tech-title {
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.5rem;
   color: var(--text);
-  font-size: 1.0625rem;
+  font-size: 1rem;
   font-weight: 500;
   line-height: 1.3;
 }
@@ -123,28 +131,33 @@
 .vision-modal__lead {
   max-width: 34rem;
   color: var(--text-muted);
-  font-size: 1rem;
+  font-size: 0.9375rem;
   font-weight: 400;
-  line-height: 1.55;
+  line-height: 1.5;
 }
 
 .vision-modal__demo {
-  margin-top: 1.35rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  margin-top: 0.95rem;
 }
 
 .vision-modal__state {
   display: inline-grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  flex: 0 0 auto;
   width: min(100%, 22rem);
-  margin-bottom: 0.9rem;
+  margin-bottom: 0.75rem;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   overflow: hidden;
 }
 
 .vision-modal__state-btn {
-  min-height: 2.5rem;
-  padding: 0.5rem 0.75rem;
+  min-height: 2.4rem;
+  padding: 0.45rem 0.7rem;
   border: 0;
   border-right: 1px solid var(--border);
   background: transparent;
@@ -172,10 +185,11 @@
 
 .vision-modal__stage {
   position: relative;
+  flex: 1 1 auto;
   overflow: hidden;
   width: 100%;
-  aspect-ratio: 939 / 1400;
-  max-height: min(52vh, 28rem);
+  min-height: 12rem;
+  height: clamp(13rem, calc(94vh - 21.5rem), 34rem);
   border-radius: var(--radius-media);
   background-color: #2a2823;
 }
@@ -209,9 +223,15 @@
   }
 }
 
+@media (min-height: 720px) and (min-width: 768px) {
+  .vision-modal__content {
+    overflow: hidden;
+  }
+}
+
 @media (max-width: 640px) {
   .vision-modal {
-    padding: 0.65rem;
+    padding: 0.5rem;
     align-items: stretch;
   }
 
@@ -222,14 +242,13 @@
   }
 
   .vision-modal__content {
-    padding: 1.25rem 1rem 1.5rem;
-    padding-right: 1rem;
-    padding-top: 3.5rem;
+    overflow: auto;
+    padding: 3.35rem 1rem 1.25rem;
   }
 
   .vision-modal__close {
-    top: 0.65rem;
-    right: 0.65rem;
+    top: 0.55rem;
+    right: 0.55rem;
   }
 
   .vision-modal__tabs,
@@ -238,7 +257,22 @@
   }
 
   .vision-modal__stage {
-    aspect-ratio: 939 / 1675;
-    max-height: min(58vh, 30rem);
+    height: auto;
+    min-height: 16rem;
+    aspect-ratio: 939 / 1400;
+    max-height: min(52vh, 28rem);
+  }
+}
+
+@media (max-height: 719px) {
+  .vision-modal__content {
+    overflow: auto;
+  }
+
+  .vision-modal__stage {
+    height: auto;
+    min-height: 14rem;
+    aspect-ratio: 939 / 1400;
+    max-height: min(48vh, 24rem);
   }
 }
