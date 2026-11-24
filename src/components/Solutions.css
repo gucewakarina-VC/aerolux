@@ -73,8 +73,8 @@
 .solutions__card:hover .solutions__photo,
 .solutions__vision-trigger:hover .solutions__photo,
 .solutions__vision-trigger:focus-visible .solutions__photo,
-.solutions__floating-trigger:hover .solutions__photo,
-.solutions__floating-trigger:focus-visible .solutions__photo {
+.solutions__gallery-trigger:hover .solutions__photo,
+.solutions__gallery-trigger:focus-visible .solutions__photo {
   transform: scale(1.035);
 }
 
@@ -107,7 +107,7 @@
 }
 
 .solutions__vision-trigger,
-.solutions__floating-trigger {
+.solutions__gallery-trigger {
   display: block;
   width: 100%;
   height: 100%;
@@ -131,7 +131,7 @@
 }
 
 .solutions__vision-trigger .solutions__name,
-.solutions__floating-trigger .solutions__name {
+.solutions__gallery-trigger .solutions__name {
   position: static;
   right: auto;
   bottom: auto;
@@ -188,8 +188,8 @@
   .solutions__card:hover .solutions__photo,
   .solutions__vision-trigger:hover .solutions__photo,
   .solutions__vision-trigger:focus-visible .solutions__photo,
-  .solutions__floating-trigger:hover .solutions__photo,
-  .solutions__floating-trigger:focus-visible .solutions__photo {
+  .solutions__gallery-trigger:hover .solutions__photo,
+  .solutions__gallery-trigger:focus-visible .solutions__photo {
     transform: none;
   }
 }
@@ -201,7 +201,7 @@
 
   .solutions__card,
   .solutions__vision-trigger,
-  .solutions__floating-trigger {
+  .solutions__gallery-trigger {
     min-height: 14.5rem;
   }
 }
@@ -221,7 +221,7 @@
 
   .solutions__card,
   .solutions__vision-trigger,
-  .solutions__floating-trigger {
+  .solutions__gallery-trigger {
     min-height: 0;
     aspect-ratio: 4 / 3;
     height: auto;

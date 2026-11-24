@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { FLOATING_COVER } from "../data/floatingGallery.js";
+import { TENEVYE_COVER, TENEVYE_GALLERY } from "../data/tenevyeGallery.js";
 import { asset } from "../utils/asset.js";
 import FloatingGalleryModal from "./FloatingGalleryModal.jsx";
+import ServiceGalleryModal from "./ServiceGalleryModal.jsx";
 import VisionModal from "./VisionModal.jsx";
 import "./Solutions.css";
 
@@ -9,10 +11,12 @@ const SERVICES = [
   {
     id: "shadow",
     title: "Теневые потолки",
-    image: asset("/images/shadow-ceiling.png"),
-    position: "left bottom",
-    width: 1774,
-    height: 887,
+    cta: "Смотреть работы →",
+    image: TENEVYE_COVER.src,
+    position: "28% 22%",
+    width: TENEVYE_COVER.width,
+    height: TENEVYE_COVER.height,
+    opensTenevyeGallery: true,
   },
   {
     id: "floating",
@@ -77,8 +81,11 @@ function Solutions() {
   const [visionOpen, setVisionOpen] = useState(false);
   const [floatingOpen, setFloatingOpen] = useState(false);
   const [floatingGalleryKey, setFloatingGalleryKey] = useState(0);
+  const [tenevyeOpen, setTenevyeOpen] = useState(false);
+  const [tenevyeGalleryKey, setTenevyeGalleryKey] = useState(0);
   const visionTriggerRef = useRef(null);
   const floatingTriggerRef = useRef(null);
+  const tenevyeTriggerRef = useRef(null);
 
   useEffect(() => {
     const openFromHash = () => {
@@ -108,6 +115,41 @@ function Solutions() {
 
   const closeFloatingGallery = () => setFloatingOpen(false);
 
+  const openTenevyeGallery = (event) => {
+    tenevyeTriggerRef.current = event.currentTarget;
+    setTenevyeGalleryKey((value) => value + 1);
+    setTenevyeOpen(true);
+  };
+
+  const closeTenevyeGallery = () => setTenevyeOpen(false);
+
+  const renderGalleryCard = (card, className, triggerClass, onOpen) => (
+    <li key={card.id} className={`solutions__card ${className}`}>
+      <button
+        type="button"
+        className={triggerClass}
+        onClick={onOpen}
+        aria-haspopup="dialog"
+        aria-label={`${card.title}. ${card.cta}`}
+      >
+        <img
+          className="solutions__photo"
+          src={card.image}
+          alt=""
+          width={card.width}
+          height={card.height}
+          style={{ objectPosition: card.position }}
+          decoding="async"
+        />
+        <span className="solutions__shade" aria-hidden="true" />
+        <span className="solutions__copy">
+          <span className="solutions__name">{card.title}</span>
+          <span className="solutions__cta">{card.cta}</span>
+        </span>
+      </button>
+    </li>
+  );
+
   return (
     <section className="solutions" id="solutions" aria-labelledby="solutions-title">
       <div className="solutions__intro">
@@ -127,32 +169,21 @@ function Solutions() {
 
       <ul className="solutions__grid">
         {SERVICES.map((card) => {
+          if (card.opensTenevyeGallery) {
+            return renderGalleryCard(
+              card,
+              "solutions__card--tenevye",
+              "solutions__gallery-trigger",
+              openTenevyeGallery,
+            );
+          }
+
           if (card.opensFloatingGallery) {
-            return (
-              <li key={card.id} className="solutions__card solutions__card--floating">
-                <button
-                  type="button"
-                  className="solutions__floating-trigger"
-                  onClick={openFloatingGallery}
-                  aria-haspopup="dialog"
-                  aria-label={`${card.title}. ${card.cta}`}
-                >
-                  <img
-                    className="solutions__photo"
-                    src={card.image}
-                    alt=""
-                    width={card.width}
-                    height={card.height}
-                    style={{ objectPosition: card.position }}
-                    decoding="async"
-                  />
-                  <span className="solutions__shade" aria-hidden="true" />
-                  <span className="solutions__copy">
-                    <span className="solutions__name">{card.title}</span>
-                    <span className="solutions__cta">{card.cta}</span>
-                  </span>
-                </button>
-              </li>
+            return renderGalleryCard(
+              card,
+              "solutions__card--floating",
+              "solutions__gallery-trigger",
+              openFloatingGallery,
             );
           }
 
@@ -222,6 +253,15 @@ function Solutions() {
         open={floatingOpen}
         onClose={closeFloatingGallery}
         returnFocusRef={floatingTriggerRef}
+      />
+      <ServiceGalleryModal
+        key={tenevyeGalleryKey}
+        open={tenevyeOpen}
+        onClose={closeTenevyeGallery}
+        returnFocusRef={tenevyeTriggerRef}
+        title="Теневые потолки"
+        lead="Тонкая теневая линия по периметру подчёркивает геометрию потолка и создаёт аккуратное примыкание к стенам"
+        items={TENEVYE_GALLERY}
       />
     </section>
   );
