@@ -1,15 +1,15 @@
 import { useEffect, useId, useRef, useState } from "react";
-import { SHADOW_GALLERY } from "../data/shadowGallery.js";
-import "./ShadowGalleryModal.css";
+import { FLOATING_GALLERY } from "../data/floatingGallery.js";
+import "./FloatingGalleryModal.css";
 
-function ShadowGalleryModal({ open, onClose, returnFocusRef }) {
+function FloatingGalleryModal({ open, onClose, returnFocusRef }) {
   const [index, setIndex] = useState(0);
   const dialogRef = useRef(null);
   const closeRef = useRef(null);
   const touchStartX = useRef(null);
   const titleId = useId();
-  const total = SHADOW_GALLERY.length;
-  const current = SHADOW_GALLERY[index];
+  const total = FLOATING_GALLERY.length;
+  const current = FLOATING_GALLERY[index];
 
   useEffect(() => {
     if (!open) return undefined;
@@ -75,7 +75,7 @@ function ShadowGalleryModal({ open, onClose, returnFocusRef }) {
     const preload = [index, (index + 1) % total, (index - 1 + total) % total];
     preload.forEach((itemIndex) => {
       const image = new Image();
-      image.src = SHADOW_GALLERY[itemIndex].full;
+      image.src = FLOATING_GALLERY[itemIndex].full;
     });
   }, [open, index, total]);
 
@@ -99,10 +99,10 @@ function ShadowGalleryModal({ open, onClose, returnFocusRef }) {
   };
 
   return (
-    <div className="shadow-gallery" role="presentation" onClick={onClose}>
+    <div className="floating-gallery" role="presentation" onClick={onClose}>
       <div
         ref={dialogRef}
-        className="shadow-gallery__dialog"
+        className="floating-gallery__dialog"
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
@@ -111,42 +111,42 @@ function ShadowGalleryModal({ open, onClose, returnFocusRef }) {
         <button
           ref={closeRef}
           type="button"
-          className="shadow-gallery__close"
+          className="floating-gallery__close"
           aria-label="Закрыть галерею"
           onClick={onClose}
         >
           Закрыть
         </button>
 
-        <div className="shadow-gallery__header">
-          <p className="shadow-gallery__eyebrow">Решения</p>
-          <h2 id={titleId} className="shadow-gallery__title">
-            Теневые потолки
+        <div className="floating-gallery__header">
+          <p className="floating-gallery__eyebrow">Решения</p>
+          <h2 id={titleId} className="floating-gallery__title">
+            Парящие потолки
           </h2>
-          <p className="shadow-gallery__lead">
-            Примеры наших работ: детали потолка, освещение и сочетания с
-            интерьером
+          <p className="floating-gallery__lead">
+            Подсветка по периметру создаёт эффект парящего потолка. Посмотрите
+            примеры наших работ
           </p>
         </div>
 
         <div
-          className="shadow-gallery__stage"
+          className="floating-gallery__stage"
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
         >
           <button
             type="button"
-            className="shadow-gallery__nav shadow-gallery__nav--prev"
+            className="floating-gallery__nav floating-gallery__nav--prev"
             aria-label="Предыдущее фото"
             onClick={goPrev}
           >
             ‹
           </button>
 
-          <div className="shadow-gallery__frame">
+          <div className="floating-gallery__frame">
             <img
               key={current.id}
-              className="shadow-gallery__photo"
+              className="floating-gallery__photo"
               src={current.full}
               alt={current.alt}
               decoding="async"
@@ -155,7 +155,7 @@ function ShadowGalleryModal({ open, onClose, returnFocusRef }) {
 
           <button
             type="button"
-            className="shadow-gallery__nav shadow-gallery__nav--next"
+            className="floating-gallery__nav floating-gallery__nav--next"
             aria-label="Следующее фото"
             onClick={goNext}
           >
@@ -163,19 +163,19 @@ function ShadowGalleryModal({ open, onClose, returnFocusRef }) {
           </button>
         </div>
 
-        <div className="shadow-gallery__meta">
-          <p className="shadow-gallery__counter" aria-live="polite">
+        <div className="floating-gallery__meta">
+          <p className="floating-gallery__counter" aria-live="polite">
             {index + 1} / {total}
           </p>
 
-          <ul className="shadow-gallery__thumbs" aria-label="Миниатюры">
-            {SHADOW_GALLERY.map((item, itemIndex) => {
+          <ul className="floating-gallery__thumbs" aria-label="Миниатюры">
+            {FLOATING_GALLERY.map((item, itemIndex) => {
               const active = itemIndex === index;
               return (
                 <li key={item.id}>
                   <button
                     type="button"
-                    className={`shadow-gallery__thumb${active ? " is-active" : ""}`}
+                    className={`floating-gallery__thumb${active ? " is-active" : ""}`}
                     aria-label={`Фото ${itemIndex + 1}`}
                     aria-current={active ? "true" : undefined}
                     onClick={() => setIndex(itemIndex)}
@@ -199,4 +199,4 @@ function ShadowGalleryModal({ open, onClose, returnFocusRef }) {
   );
 }
 
-export default ShadowGalleryModal;
+export default FloatingGalleryModal;

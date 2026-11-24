@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { SHADOW_COVER } from "../data/shadowGallery.js";
+import { FLOATING_COVER } from "../data/floatingGallery.js";
 import { asset } from "../utils/asset.js";
-import ShadowGalleryModal from "./ShadowGalleryModal.jsx";
+import FloatingGalleryModal from "./FloatingGalleryModal.jsx";
 import VisionModal from "./VisionModal.jsx";
 import "./Solutions.css";
 
@@ -9,18 +9,20 @@ const SERVICES = [
   {
     id: "shadow",
     title: "Теневые потолки",
-    cta: "Смотреть работы →",
-    image: SHADOW_COVER.src,
-    position: "center center",
-    width: SHADOW_COVER.width,
-    height: SHADOW_COVER.height,
-    opensShadowGallery: true,
+    image: asset("/images/shadow-ceiling.png"),
+    position: "left bottom",
+    width: 1774,
+    height: 887,
   },
   {
     id: "floating",
     title: "Парящие потолки",
-    image: asset("/images/floating-ceiling.png"),
-    position: "center 46%",
+    cta: "Смотреть работы →",
+    image: FLOATING_COVER.src,
+    position: "center center",
+    width: FLOATING_COVER.width,
+    height: FLOATING_COVER.height,
+    opensFloatingGallery: true,
   },
   {
     id: "light-lines",
@@ -73,10 +75,10 @@ const SERVICES = [
 
 function Solutions() {
   const [visionOpen, setVisionOpen] = useState(false);
-  const [shadowOpen, setShadowOpen] = useState(false);
-  const [shadowGalleryKey, setShadowGalleryKey] = useState(0);
+  const [floatingOpen, setFloatingOpen] = useState(false);
+  const [floatingGalleryKey, setFloatingGalleryKey] = useState(0);
   const visionTriggerRef = useRef(null);
-  const shadowTriggerRef = useRef(null);
+  const floatingTriggerRef = useRef(null);
 
   useEffect(() => {
     const openFromHash = () => {
@@ -98,13 +100,13 @@ function Solutions() {
 
   const closeVision = () => setVisionOpen(false);
 
-  const openShadowGallery = (event) => {
-    shadowTriggerRef.current = event.currentTarget;
-    setShadowGalleryKey((value) => value + 1);
-    setShadowOpen(true);
+  const openFloatingGallery = (event) => {
+    floatingTriggerRef.current = event.currentTarget;
+    setFloatingGalleryKey((value) => value + 1);
+    setFloatingOpen(true);
   };
 
-  const closeShadowGallery = () => setShadowOpen(false);
+  const closeFloatingGallery = () => setFloatingOpen(false);
 
   return (
     <section className="solutions" id="solutions" aria-labelledby="solutions-title">
@@ -125,13 +127,13 @@ function Solutions() {
 
       <ul className="solutions__grid">
         {SERVICES.map((card) => {
-          if (card.opensShadowGallery) {
+          if (card.opensFloatingGallery) {
             return (
-              <li key={card.id} className="solutions__card solutions__card--shadow">
+              <li key={card.id} className="solutions__card solutions__card--floating">
                 <button
                   type="button"
-                  className="solutions__shadow-trigger"
-                  onClick={openShadowGallery}
+                  className="solutions__floating-trigger"
+                  onClick={openFloatingGallery}
                   aria-haspopup="dialog"
                   aria-label={`${card.title}. ${card.cta}`}
                 >
@@ -215,11 +217,11 @@ function Solutions() {
         onClose={closeVision}
         returnFocusRef={visionTriggerRef}
       />
-      <ShadowGalleryModal
-        key={shadowGalleryKey}
-        open={shadowOpen}
-        onClose={closeShadowGallery}
-        returnFocusRef={shadowTriggerRef}
+      <FloatingGalleryModal
+        key={floatingGalleryKey}
+        open={floatingOpen}
+        onClose={closeFloatingGallery}
+        returnFocusRef={floatingTriggerRef}
       />
     </section>
   );
