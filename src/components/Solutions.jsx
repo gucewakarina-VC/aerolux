@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import { SHADOW_COVER } from "../data/shadowGallery.js";
 import { asset } from "../utils/asset.js";
+import ShadowGalleryModal from "./ShadowGalleryModal.jsx";
 import VisionModal from "./VisionModal.jsx";
 import "./Solutions.css";
 
@@ -7,10 +9,12 @@ const SERVICES = [
   {
     id: "shadow",
     title: "Теневые потолки",
-    image: asset("/images/shadow-ceiling.png"),
-    position: "left bottom",
-    width: 1774,
-    height: 887,
+    cta: "Смотреть работы →",
+    image: SHADOW_COVER.src,
+    position: "center center",
+    width: SHADOW_COVER.width,
+    height: SHADOW_COVER.height,
+    opensShadowGallery: true,
   },
   {
     id: "floating",
@@ -69,7 +73,10 @@ const SERVICES = [
 
 function Solutions() {
   const [visionOpen, setVisionOpen] = useState(false);
+  const [shadowOpen, setShadowOpen] = useState(false);
+  const [shadowGalleryKey, setShadowGalleryKey] = useState(0);
   const visionTriggerRef = useRef(null);
+  const shadowTriggerRef = useRef(null);
 
   useEffect(() => {
     const openFromHash = () => {
@@ -91,6 +98,14 @@ function Solutions() {
 
   const closeVision = () => setVisionOpen(false);
 
+  const openShadowGallery = (event) => {
+    shadowTriggerRef.current = event.currentTarget;
+    setShadowGalleryKey((value) => value + 1);
+    setShadowOpen(true);
+  };
+
+  const closeShadowGallery = () => setShadowOpen(false);
+
   return (
     <section className="solutions" id="solutions" aria-labelledby="solutions-title">
       <div className="solutions__intro">
@@ -110,6 +125,35 @@ function Solutions() {
 
       <ul className="solutions__grid">
         {SERVICES.map((card) => {
+          if (card.opensShadowGallery) {
+            return (
+              <li key={card.id} className="solutions__card solutions__card--shadow">
+                <button
+                  type="button"
+                  className="solutions__shadow-trigger"
+                  onClick={openShadowGallery}
+                  aria-haspopup="dialog"
+                  aria-label={`${card.title}. ${card.cta}`}
+                >
+                  <img
+                    className="solutions__photo"
+                    src={card.image}
+                    alt=""
+                    width={card.width}
+                    height={card.height}
+                    style={{ objectPosition: card.position }}
+                    decoding="async"
+                  />
+                  <span className="solutions__shade" aria-hidden="true" />
+                  <span className="solutions__copy">
+                    <span className="solutions__name">{card.title}</span>
+                    <span className="solutions__cta">{card.cta}</span>
+                  </span>
+                </button>
+              </li>
+            );
+          }
+
           if (card.opensVision) {
             return (
               <li key={card.id} className="solutions__card solutions__card--vision">
@@ -170,6 +214,12 @@ function Solutions() {
         open={visionOpen}
         onClose={closeVision}
         returnFocusRef={visionTriggerRef}
+      />
+      <ShadowGalleryModal
+        key={shadowGalleryKey}
+        open={shadowOpen}
+        onClose={closeShadowGallery}
+        returnFocusRef={shadowTriggerRef}
       />
     </section>
   );

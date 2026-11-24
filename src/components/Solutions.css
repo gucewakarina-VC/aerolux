@@ -72,7 +72,9 @@
 
 .solutions__card:hover .solutions__photo,
 .solutions__vision-trigger:hover .solutions__photo,
-.solutions__vision-trigger:focus-visible .solutions__photo {
+.solutions__vision-trigger:focus-visible .solutions__photo,
+.solutions__shadow-trigger:hover .solutions__photo,
+.solutions__shadow-trigger:focus-visible .solutions__photo {
   transform: scale(1.035);
 }
 
@@ -104,7 +106,8 @@
   line-height: 1.3;
 }
 
-.solutions__vision-trigger {
+.solutions__vision-trigger,
+.solutions__shadow-trigger {
   display: block;
   width: 100%;
   height: 100%;
@@ -127,7 +130,8 @@
   gap: 0.35rem;
 }
 
-.solutions__vision-trigger .solutions__name {
+.solutions__vision-trigger .solutions__name,
+.solutions__shadow-trigger .solutions__name {
   position: static;
   right: auto;
   bottom: auto;
@@ -183,7 +187,9 @@
 
   .solutions__card:hover .solutions__photo,
   .solutions__vision-trigger:hover .solutions__photo,
-  .solutions__vision-trigger:focus-visible .solutions__photo {
+  .solutions__vision-trigger:focus-visible .solutions__photo,
+  .solutions__shadow-trigger:hover .solutions__photo,
+  .solutions__shadow-trigger:focus-visible .solutions__photo {
     transform: none;
   }
 }
@@ -194,7 +200,8 @@
   }
 
   .solutions__card,
-  .solutions__vision-trigger {
+  .solutions__vision-trigger,
+  .solutions__shadow-trigger {
     min-height: 14.5rem;
   }
 }
@@ -213,7 +220,8 @@
   }
 
   .solutions__card,
-  .solutions__vision-trigger {
+  .solutions__vision-trigger,
+  .solutions__shadow-trigger {
     min-height: 0;
     aspect-ratio: 4 / 3;
     height: auto;
