@@ -5,15 +5,15 @@ const SHOTS = [
   {
     className: "team__shot team__shot--main",
     src: asset("/images/team-installation.png"),
-    width: 1448,
-    height: 1086,
+    width: 1024,
+    height: 768,
     position: "45% 52%",
   },
   {
     className: "team__shot team__shot--top",
     src: asset("/images/team-lighting.png"),
-    width: 1774,
-    height: 887,
+    width: 1024,
+    height: 512,
     position: "58% 42%",
   },
   {
