@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { FLOATING_COVER } from "../data/floatingGallery.js";
+import {
+  LIGHT_LINES_COVER,
+  LIGHT_LINES_GALLERY,
+} from "../data/lightLinesGallery.js";
 import { TENEVYE_COVER, TENEVYE_GALLERY } from "../data/tenevyeGallery.js";
+import { TRACKS_COVER, TRACKS_GALLERY } from "../data/tracksGallery.js";
 import { asset } from "../utils/asset.js";
 import FloatingGalleryModal from "./FloatingGalleryModal.jsx";
 import ServiceGalleryModal from "./ServiceGalleryModal.jsx";
@@ -31,16 +36,22 @@ const SERVICES = [
   {
     id: "light-lines",
     title: "Световые линии",
-    image: asset("/images/light-lines.png"),
-    position: "62% 46%",
+    cta: "Смотреть работы →",
+    image: LIGHT_LINES_COVER.src,
+    position: "center 40%",
+    width: LIGHT_LINES_COVER.width,
+    height: LIGHT_LINES_COVER.height,
+    opensLightLinesGallery: true,
   },
   {
     id: "track",
     title: "Трековое освещение",
-    image: asset("/images/track-lighting.png"),
-    position: "center",
-    width: 1755,
-    height: 896,
+    cta: "Смотреть работы →",
+    image: TRACKS_COVER.src,
+    position: "center 45%",
+    width: TRACKS_COVER.width,
+    height: TRACKS_COVER.height,
+    opensTracksGallery: true,
   },
   {
     id: "niche",
@@ -83,9 +94,15 @@ function Solutions() {
   const [floatingGalleryKey, setFloatingGalleryKey] = useState(0);
   const [tenevyeOpen, setTenevyeOpen] = useState(false);
   const [tenevyeGalleryKey, setTenevyeGalleryKey] = useState(0);
+  const [lightLinesOpen, setLightLinesOpen] = useState(false);
+  const [lightLinesGalleryKey, setLightLinesGalleryKey] = useState(0);
+  const [tracksOpen, setTracksOpen] = useState(false);
+  const [tracksGalleryKey, setTracksGalleryKey] = useState(0);
   const visionTriggerRef = useRef(null);
   const floatingTriggerRef = useRef(null);
   const tenevyeTriggerRef = useRef(null);
+  const lightLinesTriggerRef = useRef(null);
+  const tracksTriggerRef = useRef(null);
 
   useEffect(() => {
     const openFromHash = () => {
@@ -123,11 +140,27 @@ function Solutions() {
 
   const closeTenevyeGallery = () => setTenevyeOpen(false);
 
-  const renderGalleryCard = (card, className, triggerClass, onOpen) => (
+  const openLightLinesGallery = (event) => {
+    lightLinesTriggerRef.current = event.currentTarget;
+    setLightLinesGalleryKey((value) => value + 1);
+    setLightLinesOpen(true);
+  };
+
+  const closeLightLinesGallery = () => setLightLinesOpen(false);
+
+  const openTracksGallery = (event) => {
+    tracksTriggerRef.current = event.currentTarget;
+    setTracksGalleryKey((value) => value + 1);
+    setTracksOpen(true);
+  };
+
+  const closeTracksGallery = () => setTracksOpen(false);
+
+  const renderGalleryCard = (card, className, onOpen) => (
     <li key={card.id} className={`solutions__card ${className}`}>
       <button
         type="button"
-        className={triggerClass}
+        className="solutions__gallery-trigger"
         onClick={onOpen}
         aria-haspopup="dialog"
         aria-label={`${card.title}. ${card.cta}`}
@@ -173,7 +206,6 @@ function Solutions() {
             return renderGalleryCard(
               card,
               "solutions__card--tenevye",
-              "solutions__gallery-trigger",
               openTenevyeGallery,
             );
           }
@@ -182,8 +214,23 @@ function Solutions() {
             return renderGalleryCard(
               card,
               "solutions__card--floating",
-              "solutions__gallery-trigger",
               openFloatingGallery,
+            );
+          }
+
+          if (card.opensLightLinesGallery) {
+            return renderGalleryCard(
+              card,
+              "solutions__card--light-lines",
+              openLightLinesGallery,
+            );
+          }
+
+          if (card.opensTracksGallery) {
+            return renderGalleryCard(
+              card,
+              "solutions__card--tracks",
+              openTracksGallery,
             );
           }
 
@@ -262,6 +309,24 @@ function Solutions() {
         title="Теневые потолки"
         lead="Тонкая теневая линия по периметру подчёркивает геометрию потолка и создаёт аккуратное примыкание к стенам"
         items={TENEVYE_GALLERY}
+      />
+      <ServiceGalleryModal
+        key={lightLinesGalleryKey}
+        open={lightLinesOpen}
+        onClose={closeLightLinesGallery}
+        returnFocusRef={lightLinesTriggerRef}
+        title="Световые линии"
+        lead="Световые линии создают геометрический рисунок на потолке и дополняют освещение пространства"
+        items={LIGHT_LINES_GALLERY}
+      />
+      <ServiceGalleryModal
+        key={tracksGalleryKey}
+        open={tracksOpen}
+        onClose={closeTracksGallery}
+        returnFocusRef={tracksTriggerRef}
+        title="Трековое освещение"
+        lead="Трековое освещение помогает расставить световые акценты и подобрать освещение под задачи интерьера"
+        items={TRACKS_GALLERY}
       />
     </section>
   );
