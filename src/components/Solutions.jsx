@@ -4,6 +4,7 @@ import {
   LIGHT_LINES_COVER,
   LIGHT_LINES_GALLERY,
 } from "../data/lightLinesGallery.js";
+import { NISHI_COVER, NISHI_GALLERY } from "../data/nishiGallery.js";
 import { TENEVYE_COVER, TENEVYE_GALLERY } from "../data/tenevyeGallery.js";
 import { TRACKS_COVER, TRACKS_GALLERY } from "../data/tracksGallery.js";
 import { asset } from "../utils/asset.js";
@@ -56,8 +57,12 @@ const SERVICES = [
   {
     id: "niche",
     title: "Скрытая ниша для штор",
-    image: asset("/images/hidden-cornice.png"),
-    position: "48% 55%",
+    cta: "Смотреть работы →",
+    image: NISHI_COVER.src,
+    position: "62% 48%",
+    width: NISHI_COVER.width,
+    height: NISHI_COVER.height,
+    opensNishiGallery: true,
   },
   {
     id: "vision",
@@ -98,11 +103,14 @@ function Solutions() {
   const [lightLinesGalleryKey, setLightLinesGalleryKey] = useState(0);
   const [tracksOpen, setTracksOpen] = useState(false);
   const [tracksGalleryKey, setTracksGalleryKey] = useState(0);
+  const [nishiOpen, setNishiOpen] = useState(false);
+  const [nishiGalleryKey, setNishiGalleryKey] = useState(0);
   const visionTriggerRef = useRef(null);
   const floatingTriggerRef = useRef(null);
   const tenevyeTriggerRef = useRef(null);
   const lightLinesTriggerRef = useRef(null);
   const tracksTriggerRef = useRef(null);
+  const nishiTriggerRef = useRef(null);
 
   useEffect(() => {
     const openFromHash = () => {
@@ -155,6 +163,14 @@ function Solutions() {
   };
 
   const closeTracksGallery = () => setTracksOpen(false);
+
+  const openNishiGallery = (event) => {
+    nishiTriggerRef.current = event.currentTarget;
+    setNishiGalleryKey((value) => value + 1);
+    setNishiOpen(true);
+  };
+
+  const closeNishiGallery = () => setNishiOpen(false);
 
   const renderGalleryCard = (card, className, onOpen) => (
     <li key={card.id} className={`solutions__card ${className}`}>
@@ -231,6 +247,14 @@ function Solutions() {
               card,
               "solutions__card--tracks",
               openTracksGallery,
+            );
+          }
+
+          if (card.opensNishiGallery) {
+            return renderGalleryCard(
+              card,
+              "solutions__card--nishi",
+              openNishiGallery,
             );
           }
 
@@ -327,6 +351,15 @@ function Solutions() {
         title="Трековое освещение"
         lead="Трековое освещение помогает расставить световые акценты и подобрать освещение под задачи интерьера"
         items={TRACKS_GALLERY}
+      />
+      <ServiceGalleryModal
+        key={nishiGalleryKey}
+        open={nishiOpen}
+        onClose={closeNishiGallery}
+        returnFocusRef={nishiTriggerRef}
+        title="Скрытые ниши"
+        lead="Скрытые ниши позволяют аккуратно разместить карниз: крепления остаются за потолком, а шторы становятся частью интерьера"
+        items={NISHI_GALLERY}
       />
     </section>
   );
